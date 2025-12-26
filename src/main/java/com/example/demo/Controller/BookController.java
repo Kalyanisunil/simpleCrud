@@ -4,10 +4,10 @@ import org.springframework.ui.Model;
 import com.example.demo.Models.Book;
 import com.example.demo.Repository.BookRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 
@@ -40,10 +40,16 @@ public  class BookController
     }
 
     @PostMapping("/save")
-    public String saveBook(@ModelAttribute Book book)
-    {
+    public String saveBook(@ModelAttribute Book book ,
+                           @RequestParam("imageFile") MultipartFile image) throws IOException {
+        if (!image.isEmpty()) {
+            book.setImage(image.getBytes());
+        }
+
         repo.save(book);
         return "redirect:/";
+
+
     }
 
     @GetMapping("/edit/{id}")
@@ -59,4 +65,12 @@ public  class BookController
         repo.deleteById(id);
         return "redirect:/";
     }
+
+    @GetMapping("/book/image/{id}")
+    @ResponseBody
+    public byte[] showImage(@PathVariable Long id) {
+        Book book = repo.findById(id).orElseThrow();
+        return book.getImage();
+    }
+
 }

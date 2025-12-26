@@ -14,7 +14,14 @@ public class Book {
     private String author;
     private double price;
 
-    // getters & setters
+    @Lob
+    @Column(columnDefinition = "LONGBLOB")
+    private byte[] image;
+
+
+
+
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -26,4 +33,12 @@ public class Book {
 
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 }

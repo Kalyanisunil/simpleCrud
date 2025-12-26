@@ -19,6 +19,10 @@
             <a th:href="@{/edit/{id}(id=${b.id})}">Edit</a>
             <a th:href="@{/delete/{id}(id=${b.id})}">Delete</a>
         </td>
+        <td>
+            <img th:src="@{/book/image/{id}(id=${b.id})}" width="80"/>
+        </td>
+
     </tr>
 </table>
 
