@@ -52,4 +52,11 @@ public  class BookController
         model.addAttribute("book",repo.findById(id).orElseThrow());
         return "edit-book";
     }
+
+    @GetMapping("/delete/{id}")
+    public  String deleteBook(@PathVariable Long id)
+    {
+        repo.deleteById(id);
+        return "redirect:/";
+    }
 }
