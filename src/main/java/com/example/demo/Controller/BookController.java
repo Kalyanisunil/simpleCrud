@@ -5,6 +5,8 @@ import com.example.demo.Models.Book;
 import com.example.demo.Repository.BookRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 
@@ -35,4 +37,12 @@ public  class BookController
         return "add-book";
 
     }
+
+    @PostMapping("/save")
+    public String saveBook(@ModelAttribute Book book)
+    {
+        repo.save(book);
+        return "redirect:/";
+    }
+
 }
