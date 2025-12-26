@@ -27,4 +27,12 @@ public  class BookController
         model.addAttribute("books",repo.findAll());
         return "index";
     }
+
+    @GetMapping("/add")
+    public String addBook(Model model)
+    {
+        model.addAttribute("book",new Book());
+        return "add-book";
+
+    }
 }
