@@ -6,6 +6,7 @@ import com.example.demo.Repository.BookRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -45,4 +46,10 @@ public  class BookController
         return "redirect:/";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editBook(@PathVariable Long id, Model model)
+    {
+        model.addAttribute("book",repo.findById(id).orElseThrow());
+        return "edit-book";
+    }
 }
